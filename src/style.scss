@@ -1,0 +1,313 @@
+$wires_color: #ccc;
+$human_color: #666;
+$blood_color: #b51e23;
+$transition_time: 1s;
+$global_background: #f7f7f7;
+
+body {
+  overflow-y: hidden;
+  background: $global_background;
+  font-family: "Montserrat", sans-serif;
+}
+#about {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  a {
+    display: inline-block;
+    height: 2.5em;
+    margin: 0 5px;
+  }
+  a i {
+    font-size: 1.5em;
+    &.fa-linkedin {
+      color: #0073b0;
+    }
+    &.fa-github,
+    &.fa-codepen,
+    &.fa-globe {
+      color: #24292e;
+    }
+    &.fa-twitter {
+      color: #1da1f2;
+    }
+  }
+}
+#content {
+  position: relative;
+  margin: 50px auto;
+  width: 600px;
+  height: 600px;
+}
+
+h3 {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+#blood_selector {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 5px;
+  width: 200px;
+  height: 100px;
+  position: absolute;
+  left: 10px;
+  top: 45px;
+  z-index: 2;
+
+  div {
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $global_background;
+    border: 1px solid $blood_color;
+    border-radius: 25%;
+  }
+
+  div:hover {
+    border: 1px solid #1da1f2;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+#blood_content {
+  position: absolute;
+  top: 50px;
+  width: 100%;
+  height: 100%;
+}
+#center_via_c {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+
+  .center_via {
+    width: 8px;
+    background: $wires_color;
+    height: 200px;
+    position: absolute;
+    left: 304px;
+    top: 276px;
+  }
+
+  .blood_via {
+    height: 0;
+    background-color: $blood_color;
+    right: 50%;
+    width: 8px;
+    transition: height $transition_time/4;
+  }
+}
+
+.bar {
+  position: fixed;
+  right: 0;
+  top: 55px;
+  width: 55%;
+  height: 8px;
+  border-radius: 2px 0 0 2px;
+  background-color: $wires_color;
+}
+
+.main_bag {
+  position: absolute;
+  width: 100px;
+  height: 140px;
+  top: 70px;
+  left: 250px;
+  border-radius: 30px;
+  opacity: 0.8;
+  background-color: rgba(154, 207, 234, 0.9);
+  border: 8px solid rgba(154, 207, 234, 0.9);
+
+  .blood {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background-color: $blood_color;
+    border-radius: 0 0 35px 35px;
+    transition: height $transition_time;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -6px;
+      width: 100%;
+      height: 10px;
+      background-color: #92191b;
+      border-radius: 100%;
+    }
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    top: -118px;
+    left: 45%;
+    width: 10%;
+    height: 110px;
+    background-color: $wires_color;
+  }
+}
+
+#humans {
+  position: absolute;
+  top: 276px;
+  width: 400px;
+  height: 200px;
+  left: 108px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(4, 1fr);
+
+  .human {
+    position: relative;
+    .via {
+      position: absolute;
+      text-align: right;
+      width: 100%;
+      height: 8px;
+      background-color: $wires_color;
+      bottom: 0;
+    }
+    .blood_via {
+      position: absolute;
+      height: 8px;
+      background-color: $blood_color;
+      width: 0;
+      bottom: 0;
+      transition: width $transition_time;
+    }
+
+    &.left {
+      display: grid;
+      justify-content: left;
+      align-content: center;
+      .blood_via {
+        right: 0;
+      }
+      .scribble {
+        left: -30px;
+        span {
+          left: -40px;
+          text-align: right;
+        }
+      }
+    }
+    &.right {
+      display: grid;
+      justify-content: right;
+      align-content: center;
+      .scribble {
+        right: -60px;
+        span {
+          right: -10px;
+        }
+      }
+    }
+
+    .scribble {
+      position: absolute;
+      height: 50px;
+      width: 50px;
+      top: 0;
+      transition: background $transition_time;
+
+      span {
+        position: absolute;
+        display: grid;
+        align-items: end;
+        height: 100%;
+      }
+
+      .head {
+        width: 30%;
+        height: 30%;
+        background-color: $human_color;
+        border-radius: 50%;
+        margin: 2px auto;
+        transition: background $transition_time;
+        position: absolute;
+        top: 30%;
+        left: 5%;
+      }
+      .body {
+        position: absolute;
+        bottom: 0;
+        width: 40%;
+        height: 30%;
+        background-color: $human_color;
+        border-radius: 50% 50% 0 0;
+        margin: 0 auto;
+        transition: background $transition_time;
+      }
+    }
+  }
+}
+
+.no_transition {
+  transition: none !important;
+}
+
+.highlight {
+  border: 2px solid $blood_color !important;
+  font-weight: bold;
+}
+.highlightText {
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 400px) {
+  #content {
+    position: relative;
+    margin: 25px auto;
+    width: 300px;
+    height: 300px;
+
+    h3 {
+      top: 10px;
+      font-size: 1em;
+    }
+
+    #blood_selector {
+      width: 150px;
+      height: 75px;
+      font-size: 0.75em;
+      top: 45px;
+    }
+    .bar {
+      top: 40px;
+    }
+
+    .main_bag {
+      width: 75px;
+      height: 105px;
+      left: 125px;
+
+      &::before {
+        top: -108px;
+        height: 100px;
+      }
+
+      .blood {
+        height: 70%;
+      }
+    }
+    #center_via_c .center_via {
+      left: 167px;
+      top: 240px;
+    }
+    #humans {
+      top: 240px;
+      width: 180px;
+      left: 85px;
+    }
+  }
+}
